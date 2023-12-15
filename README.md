@@ -1,5 +1,7 @@
 # Working Title
 
+![Native Build](https://github.com/gavinskycastle/WorkingTitle/actions/workflows/nativebuild.yml/badge.svg) ![Web Build](https://github.com/gavinskycastle/WorkingTitle/actions/workflows/webbuild.yml/badge.svg)
+
 ## Building to Web
 
 **You need to install Emscripten** [Download Here!](https://emscripten.org/docs/getting_started/downloads.html)
