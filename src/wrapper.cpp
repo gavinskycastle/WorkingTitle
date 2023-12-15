@@ -1,6 +1,6 @@
 #include "../libs/raylib/src/raylib.h"
 #include "helper.hpp"
-#include "app.hpp"
+#include "main.hpp"
 
 void web_loop()
 {
