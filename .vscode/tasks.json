@@ -6,10 +6,10 @@
 		{
 			"label": "run app",
 			"type": "shell",
-			"command": "./build/GeometrySlash",
+			"command": "./build/WorkingTitle",
 			"problemMatcher": [],
 			"group": {
-				"kind": "test",
+				"kind": "build",
 				"isDefault": true
 			}
 		}

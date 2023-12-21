@@ -133,7 +133,14 @@ jobs:
           rm -f CMakeCache.txt
           cd ../
       shell: bash
-
+    
+    - name: Rename html file
+      run: |
+          cd build/
+          mv WorkingTitle.html index.html
+          cd ../
+      shell: bash
+    
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
