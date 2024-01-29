@@ -1,0 +1,3 @@
+enum PlatformRotation;
+
+class Platform;
