@@ -9,7 +9,7 @@ Color backgroundColor;
 Color fillColor;
 Color fillLight;
 
-Platform testPlatform;
+Platform testPlatform = Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5);
 
 void init_app() {
     borderColor = Color{11, 36, 71};
@@ -22,7 +22,7 @@ bool app_loop() {
     BeginDrawing();
     ClearBackground(backgroundColor);
     
-    
+    //testPlatform.draw();
     
     EndDrawing();
 
