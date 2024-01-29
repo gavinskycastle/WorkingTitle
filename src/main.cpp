@@ -9,7 +9,7 @@ Color backgroundColor;
 Color fillColor;
 Color fillLight;
 
-Platform testPlatform = Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5);
+//Platform testPlatform = Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5);
 
 void init_app() {
     borderColor = Color{11, 36, 71};
