@@ -2,6 +2,7 @@
 #define DIALOGUE_HPP
 
 #include <string>
+#include <iostream>
 #include <vector>
 #include "../libs/raylib/src/raylib.h"
 
@@ -17,8 +18,10 @@ class DialogueBox {
         
         // Draws and updates the dialogue box onscreen. Should be called every frame.
         void draw();
-        
+    
     private:
+        int x;
+        int y;
         Color border_color;
         Color fill_color;
         Color text_color;
