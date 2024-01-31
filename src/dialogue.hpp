@@ -26,6 +26,8 @@ class DialogueBox {
         Color fill_color;
         Color text_color;
         
+        std::string displayedText;
+        
         struct Dialogue {
             Texture2D image;
             std::string name;
