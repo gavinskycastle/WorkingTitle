@@ -1,6 +1,5 @@
 #include "dialogue.hpp"
 #include <string>
-#include <iostream>
 
 DialogueBox::DialogueBox(Color border_color, Color fill_color, Color text_color) {
     this->border_color = border_color;
@@ -43,10 +42,6 @@ void DialogueBox::draw() {
             //this->dialogueScrollSpeed = (this->dialogueQueue[0].sound.frameCount / 48000) / this->dialogueQueue[0].text.length();
             // New code:
             this->dialogueScrollSpeed = static_cast<int>(60.0 / (static_cast<double>(this->dialogueQueue[0].text.length()) / (static_cast<double>(this->dialogueQueue[0].sound.frameCount) / 48000.0)));
-            
-            std::cout << this->dialogueScrollSpeed << std::endl;
-            std::cout << this->dialogueQueue[0].text.length() << std::endl;
-            std::cout << this->dialogueQueue[0].sound.frameCount/48000 << std::endl;
         }
         
         // Add characters to the displayed text at the speed of dialogueScrollSpeed. (Do this once per second.)
