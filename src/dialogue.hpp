@@ -14,7 +14,7 @@ class DialogueBox {
         void clear();
         
         // Pushes a new dialogue onto the queue.
-        void push(std::string text, Sound sound, double duration, bool skippable, bool newPage, bool autoSkip);
+        void push(std::string text, std::string name, Image image, Sound sound, bool skippable, bool autoSkip);
         
         // Draws and updates the dialogue box onscreen. Should be called every frame.
         void draw();
@@ -34,12 +34,12 @@ class DialogueBox {
             std::string text;
             Sound sound;
             
-            double duration;
             bool skippable;
             bool autoSkip;
-            bool newPage;
         };
         
+        int dialogueScrollSpeed;
+        int dialogueScrollTimer;
         std::vector<Dialogue> dialogueQueue;
 };
 
