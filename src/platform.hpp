@@ -14,7 +14,7 @@ enum PlatformRotation {
 
 class Platform {
     public:
-        Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness);
+        Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness, bool is_ground);
         void attach(Platform *platform, PlatformRotation rotation);
         void detach();
         // void rotate(int degrees);
@@ -42,6 +42,7 @@ class Platform {
         Platform *parent;
         Texture2D border_color_texture;
         Texture2D fill_color_texture;
+        bool is_ground;
         // std::vector<Vector2> getOuterPoints(bool rotate);
         // std::vector<Vector2> getInnerPoints(std::vector<Vector2> outer_points, bool rotate = true);
 };

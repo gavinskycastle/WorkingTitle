@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-Platform::Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness) {
+Platform::Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness, bool is_ground) {
     this->x = x;
     this->y = y;
     this->width = width;
@@ -15,6 +15,7 @@ Platform::Platform(int x, int y, int width, int height, Color border_color, Colo
     this->init_angle = angle;
     this->angle = angle;
     this->line_thickness = line_thickness;
+    this->is_ground = is_ground;
     this->rotation = INDEPENDENT;
     
     // TODO: optimize such that all platforms share the same texture if possible
@@ -109,7 +110,8 @@ void Platform::draw() {
     //     this->y = static_cast<int>(parentEndPos.y);
     // }
     DrawRectanglePro(Rectangle{static_cast<float>(this->x), static_cast<float>(this->y), static_cast<float>(this->width), static_cast<float>(this->height)}, Vector2{static_cast<float>(this->height/2), static_cast<float>(this->width/2)}, this->angle, this->border_color);
-    DrawRectanglePro(Rectangle{static_cast<float>(this->x) + static_cast<float>(this->line_thickness), static_cast<float>(this->y) + static_cast<float>(this->line_thickness), static_cast<float>(this->width - this->line_thickness*2), static_cast<float>(this->height - this->line_thickness*2)}, Vector2{static_cast<float>(this->height/2), static_cast<float>(this->width/2)}, this->angle, this->fill_color);
+    if (!this->is_ground)
+        DrawRectanglePro(Rectangle{static_cast<float>(this->x) + static_cast<float>(this->line_thickness), static_cast<float>(this->y) + static_cast<float>(this->line_thickness), static_cast<float>(this->width - this->line_thickness*2), static_cast<float>(this->height - this->line_thickness*2)}, Vector2{static_cast<float>(this->height/2), static_cast<float>(this->width/2)}, this->angle, this->fill_color);
     // std::vector<Vector2> outer_points = getOuterPoints();
     // std::vector<Vector2> inner_points = getInnerPoints();
     
