@@ -18,6 +18,7 @@ class Platform {
         void attach(Platform *platform, PlatformRotation rotation);
         void detach();
         // void rotate(int degrees);
+        void setPosition(int x, int y);
         void move(int dx, int dy);
         void enlarge(int dw, int dh);
         void scale(int wm, int hm);

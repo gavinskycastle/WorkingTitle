@@ -49,6 +49,11 @@ void Platform::detach() {
 //     this->angle += degrees;
 // }
 
+void Platform::setPosition(int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+
 void Platform::move(int dx, int dy) {
     this->x += dx;
     this->y += dy;
