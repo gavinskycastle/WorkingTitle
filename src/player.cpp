@@ -1,5 +1,6 @@
 #include "../libs/raylib/src/raylib.h"
 #include "player.hpp"
+#include "math.hpp"
 #include <iostream>
 
 Player::Player(int x, int y, Color border_color, Color fill_color) {
@@ -21,8 +22,17 @@ void Player::move(int dx, int dy) {
     this->y += dy;
 }
 
+void Player::moveToFrame(LimbFrame frame, float seconds) {
+    this->timeSinceFrameStart = 0;
+    this->timeToNextFrame = seconds;
+    this->frameFinished = false;
+    this->originalFrame = this->finalFrame;
+    this->finalFrame = frame;
+}
+
 void Player::draw() {
     
+    // Draw eyes
     DrawCircle(x+(100/2)-15, y-(35/2), 10, WHITE);
     DrawCircle(x+(100/2)+15, y-(35/2), 10, WHITE);
     
@@ -71,15 +81,43 @@ void Player::draw() {
         this->gravity = 0;
         
     }
-
     
-
-    DrawLineEx(Vector2{x, y}, Vector2{x-50, y+5}, 7, WHITE);
-    DrawLineEx(Vector2{x+100, y}, Vector2{x+100+50, y+10}, 7, WHITE);
+    // Animation frame update
+    if (this->timeSinceFrameStart > this->timeToNextFrame) {
+        this->frameFinished = true;
+    }
     
-    DrawLineEx(Vector2{x+leftLegOrigin.x, y+leftLegOrigin.y}, Vector2{x+35, y+30+50}, 7, WHITE);
-    DrawLineEx(Vector2{x+rightLegOrigin.x, y+rightLegOrigin.y}, Vector2{x+70, y+30+50}, 7, WHITE);
+    if (this->frameFinished) {
+        this->leftArm = finalFrame.leftArm;
+        this->rightArm = finalFrame.rightArm;
+        this->leftLegLimb1 = finalFrame.leftLegLimb1;
+        this->leftLegLimb2 = finalFrame.leftLegLimb2;
+        this->rightLegLimb1 = finalFrame.rightLegLimb1;
+        this->rightLegLimb2 = finalFrame.rightLegLimb2;
+    } else {
+        this->timeSinceFrameStart += GetFrameTime();
+        
+        this->leftArm = vectorLerp(this->originalFrame.leftArm, finalFrame.leftArm, this->timeSinceFrameStart/this->timeToNextFrame);
+        this->rightArm = vectorLerp(this->originalFrame.rightArm, finalFrame.rightArm, this->timeSinceFrameStart/this->timeToNextFrame);
+        this->leftLegLimb1 = vectorLerp(this->originalFrame.leftLegLimb1, finalFrame.leftLegLimb1, this->timeSinceFrameStart/this->timeToNextFrame);
+        this->leftLegLimb2 = vectorLerp(this->originalFrame.leftLegLimb2, finalFrame.leftLegLimb2, this->timeSinceFrameStart/this->timeToNextFrame);
+        this->rightLegLimb1 = vectorLerp(this->originalFrame.rightLegLimb1, finalFrame.rightLegLimb1, this->timeSinceFrameStart/this->timeToNextFrame);
+        this->rightLegLimb2 = vectorLerp(this->originalFrame.rightLegLimb2, finalFrame.rightLegLimb2, this->timeSinceFrameStart/this->timeToNextFrame);
+    }
     
+    if (IsKeyPressed(KEY_Z)) {
+        this->moveToFrame(this->testFrame, 0.5);
+    }
+    
+    // Draw limbs
+    DrawLineEx(Vector2{x+leftArmOrigin.x, y+leftArmOrigin.y}, Vector2{x+leftArm.x, y+leftArm.y}, 7, WHITE); // Left arm
+    DrawLineEx(Vector2{x+rightArmOrigin.x, y+rightArmOrigin.y}, Vector2{x+rightArm.x, y+rightArm.y}, 7, WHITE); // Right arm
+    DrawLineEx(Vector2{x+leftLegOrigin.x, y+leftLegOrigin.y}, Vector2{x+leftLegLimb1.x, y+leftLegLimb1.y}, 7, WHITE); // Left leg 1
+    DrawLineEx(Vector2{x+leftLegLimb1.x, y+leftLegLimb1.y}, Vector2{x+leftLegLimb2.x, y+leftLegLimb2.y}, 7, WHITE); // Left leg 2
+    DrawLineEx(Vector2{x+rightLegOrigin.x, y+rightLegOrigin.y}, Vector2{x+rightLegLimb1.x, y+rightLegLimb1.y}, 7, WHITE); // Right leg 1
+    DrawLineEx(Vector2{x+rightLegLimb1.x, y+rightLegLimb1.y}, Vector2{x+rightLegLimb2.x, y+rightLegLimb2.y}, 7, WHITE); // Right leg 2
+    
+    // Draw platform
     this->platform->setPosition(this->x+16, this->y+45);
     this->platform->draw();
 }

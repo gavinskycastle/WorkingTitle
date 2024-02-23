@@ -1,6 +1,7 @@
 #include <cmath>
 #include "../libs/raylib/src/raylib.h"
 #include "../libs/raylib/src/rlgl.h"
+#include "../libs/raylib/src/raymath.h"
 
 Vector2 rotateVector(Vector2 point, Vector2 origin, float degrees) {
     double radians = degrees * M_PI / 180.0;
@@ -47,4 +48,9 @@ void DrawTexturePoly(Texture2D texture, Vector2 center, Vector2 *points, Vector2
     rlEnd();
 
     rlSetTexture(0);
+}
+
+// Calculate linear interpolation between two Vector2Ds
+Vector2 vectorLerp(Vector2 a, Vector2 b, float t) {
+    return Vector2{Lerp(a.x, b.x, t), Lerp(a.y, b.y, t)};
 }
