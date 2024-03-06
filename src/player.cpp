@@ -96,6 +96,7 @@ void Player::draw() {
         if (this->timeSinceFrameStart > this->timeToNextFrame) {
             this->frameFinished = true;
         }
+        
         if (dx == 0) {
             this->moveToFrame(this->standingFrame, 0.08);
         } else if (this->finalFrame.id == this->standingFrame.id && this->frameFinished) {

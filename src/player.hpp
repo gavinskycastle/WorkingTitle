@@ -60,16 +60,16 @@ class Player {
             Vector2{80, 80}, // Right leg 3
         };
         
-        LimbFrame testFrame = LimbFrame{
+        LimbFrame jumpingFrame = LimbFrame{
             1, // ID
-            Vector2{-50-50, 5}, // Left arm
-            Vector2{150+50, 10}, // Right arm
-            Vector2{35-50, 80+40}, // Left leg 1
-            Vector2{35-50, 80+50}, // Left leg 2
-            Vector2{45-50, 80+50}, // Left leg 3
-            Vector2{70+50, 80+40}, // Right leg 1
-            Vector2{70+50, 80+50}, // Right leg 2
-            Vector2{80+50, 80+50}, // Right leg 3
+            Vector2{-50, -5}, // Left arm
+            Vector2{150, -10}, // Right arm
+            Vector2{35, 70}, // Left leg 1
+            Vector2{35, 80}, // Left leg 2
+            Vector2{45, 80}, // Left leg 3
+            Vector2{70, 70}, // Right leg 1
+            Vector2{70, 80}, // Right leg 2
+            Vector2{80, 80}, // Right leg 3
         };
         
         LimbFrame walkFrame1 = LimbFrame{
