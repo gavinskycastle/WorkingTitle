@@ -30,6 +30,7 @@ class Player {
         void setPosition(int x, int y);
         void move(int dx, int dy);
         void draw();
+        void close();
     
     private:
         float x;
@@ -137,6 +138,8 @@ class Player {
         Vector2 rightLegLimb1;
         Vector2 rightLegLimb2;
         Vector2 rightLegLimb3;
+        
+        RenderTexture2D drawTexture = LoadRenderTexture(220, 140);
 };
 
 #endif // PLAYER_H

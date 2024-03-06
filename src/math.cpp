@@ -54,3 +54,15 @@ void DrawTexturePoly(Texture2D texture, Vector2 center, Vector2 *points, Vector2
 Vector2 vectorLerp(Vector2 a, Vector2 b, float t) {
     return Vector2{Lerp(a.x, b.x, t), Lerp(a.y, b.y, t)};
 }
+
+float sTPtextureX(float x) {
+    return x+55;
+}
+
+float sTPtextureY(float y) {
+    return (-y)+100;
+}
+
+Vector2 sTPvector2(Vector2 vector) {
+    return Vector2{sTPtextureX(vector.x), sTPtextureY(vector.y)};
+}

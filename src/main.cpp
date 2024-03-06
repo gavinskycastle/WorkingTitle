@@ -68,4 +68,5 @@ bool app_loop() {
 }
 
 void deinit_app() {
+    testPlayer->close();
 }
