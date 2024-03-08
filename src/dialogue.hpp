@@ -6,6 +6,16 @@
 #include <vector>
 #include "../libs/raylib/src/raylib.h"
 
+struct Dialogue {
+    Texture2D image;
+    std::string name;
+    std::string text;
+    Sound sound;
+    
+    bool skippable;
+    bool autoSkip;
+};
+
 class DialogueBox {
     public:
         DialogueBox(Color border_color, Color fill_color, Color text_color);
@@ -27,16 +37,6 @@ class DialogueBox {
         Color text_color;
         
         std::string displayedText;
-        
-        struct Dialogue {
-            Texture2D image;
-            std::string name;
-            std::string text;
-            Sound sound;
-            
-            bool skippable;
-            bool autoSkip;
-        };
         
         int dialogueScrollSpeed;
         int dialogueScrollTimer;

@@ -6,15 +6,13 @@
 #include "dialogue.hpp"
 #include "player.hpp"
 #include <iostream>
+#include "level.hpp"
 
 Color borderColor;
 Color backgroundColor;
 Color fillColor;
 Color fillLight;
 Color textColor;
-
-//Platform testPlatform = Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5);
-DialogueBox* testDialogueBox;
 
 Sound testSound;
 Image testImage;
@@ -24,6 +22,8 @@ Platform* testPlatform;
 Platform* ground;
 
 Player* testPlayer;
+
+Level* testLevel;
 
 void init_app() {
     InitAudioDevice();
@@ -38,29 +38,25 @@ void init_app() {
     fillLight = Color{165, 215, 232, 255};
     textColor = Color{0, 0, 0, 255};
     
-    testDialogueBox = new DialogueBox(borderColor, fillColor, textColor);
     testPlatform = new Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5, false);
-    
     ground = new Platform(10, 10, 600, 250, borderColor, fillColor, 0, 5, true);
     
-    testDialogueBox->push("The FitnessGram Pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter Pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal *boop*. A single lap should be completed each time you hear this sound *ding*. Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start. On your mark, get ready, start.", "The Narrator", 
-     testImage, testSound, true, false);
-     
-    testPlayer = new Player(100, 100, borderColor, fillColor);
+    testLevel = new Level(Vector2{100, 100},
+        std::vector<Platform*>{testPlatform, ground},
+        std::vector<std::string>{"The Narrator"},
+        std::vector<std::string>{"The FitnessGram Pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter Pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal *boop*. A single lap should be completed each time you hear this sound *ding*. Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start."},
+        std::vector<Image>{testImage},
+        std::vector<Sound>{testSound},
+        borderColor, fillColor, textColor);
 }
 
 bool app_loop() {
     BeginDrawing();
     ClearBackground(backgroundColor);
     
-    testDialogueBox->draw();
-    testPlatform->draw();
-    
-    ground->draw();
-    
     ground->move(0, 2);
     
-    testPlayer->draw();
+    testLevel->draw();
     
     EndDrawing();
 
@@ -68,5 +64,5 @@ bool app_loop() {
 }
 
 void deinit_app() {
-    testPlayer->close();
+    testLevel->close();
 }
