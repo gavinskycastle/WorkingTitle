@@ -1,12 +1,12 @@
 #include "main.hpp"
 #include "../libs/raylib/src/raylib.h"
-#include "../libs/raygui/src/raygui.h"
 #include "helper.hpp"
 #include "platform.hpp"
 #include "dialogue.hpp"
 #include "player.hpp"
 #include <iostream>
 #include "level.hpp"
+#include "menu.hpp"
 
 Color borderColor;
 Color backgroundColor;
@@ -24,6 +24,8 @@ Platform* ground;
 Player* testPlayer;
 
 Level* testLevel;
+
+Menu* testMenu;
 
 void init_app() {
     InitAudioDevice();
@@ -48,6 +50,8 @@ void init_app() {
         std::vector<Image>{testImage},
         std::vector<Sound>{testSound},
         borderColor, fillColor, textColor);
+    
+    testMenu = new Menu(borderColor, fillColor, textColor);
 }
 
 bool app_loop() {
@@ -57,6 +61,8 @@ bool app_loop() {
     ground->move(0, 2);
     
     testLevel->draw();
+    
+    testMenu->draw();
     
     EndDrawing();
 
