@@ -16,7 +16,10 @@ Menu::Menu(Color borderColor, Color fillColor, Color textColor) {
     this->logoTexture = LoadTextureFromImage(logoImage);
 };
 
-void Menu::draw() {
+MenuState Menu::draw() {
+    bool exit = false;
+    // Draw a transparent rectangle to darken the background
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{0, 0, 0, 127});
     DrawTexture(this->logoTexture, GetScreenWidth()/2 - this->logoTexture.width/2, static_cast<float>(GetScreenHeight())/2-315, WHITE);
     GuiSetStyle(DEFAULT, TEXT_SIZE, 25);
     GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, ColorToInt(this->fillColor));
@@ -24,23 +27,25 @@ void Menu::draw() {
     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, ColorToInt(this->borderColor));
     GuiSetStyle(BUTTON, BORDER_WIDTH, 4);
     if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2-150, 300, 75}, "Play demo level 1") == 1) {
-        std::cout << "Play demo level 1" << std::endl;
+        this->selectedLevel = 1;
     };
     if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2-50, 300, 75}, "Play demo level 2") == 1) {
-        std::cout << "Play demo level 2" << std::endl;
+        this->selectedLevel = 2;
     };
     if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+50, 300, 75}, "Play demo level 3") == 1) {
-        std::cout << "Play demo level 3" << std::endl;
+        this->selectedLevel = 3;
     };
     if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+150, 300, 75}, "Options") == 1) {
         std::cout << "Options" << std::endl;
     };
-    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+250, 300, 75}, "Exit") == 1) {
-        CloseWindow();
-    };
+    #ifndef PLATFORM_WEB
+        if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+250, 300, 75}, "Exit") == 1) {
+            exit = true;
+        };
+    #endif
     GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
     
-    
+    return MenuState{this->selectedLevel, !exit};
 };
 
 void Menu::close() {
