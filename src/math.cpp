@@ -2,6 +2,7 @@
 #include "../libs/raylib/src/raylib.h"
 #include "../libs/raylib/src/rlgl.h"
 #include "../libs/raylib/src/raymath.h"
+#define M_PI 3.14159265358979323846
 
 Vector2 rotateVector(Vector2 point, Vector2 origin, float degrees) {
     double radians = degrees * M_PI / 180.0;
