@@ -10,3 +10,5 @@ float sTPtextureX(float x);
 float sTPtextureY(float y);
 
 Vector2 sTPvector2(Vector2 vector);
+
+void DrawTextCentered(const char* text, int posX, int posY, int fontSize, Color color);

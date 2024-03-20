@@ -1,6 +1,7 @@
 #include "level.hpp"
 
 Level::Level(Vector2 startPosition, std::vector<Platform*> platforms,
+    std::vector<Pickup*> pickups,
     std::vector<std::string> dialogueNames,
     std::vector<std::string> dialogueTexts,
     std::vector<Image> dialogueImages,
@@ -9,6 +10,7 @@ Level::Level(Vector2 startPosition, std::vector<Platform*> platforms,
 {
     this->player = new Player(startPosition.x, startPosition.y, border_color, fill_color);
     this->platforms = platforms;
+    this->pickups = pickups;
     this->dialogueBox = new DialogueBox(border_color, fill_color, text_color);
     for (int i = 0; i < dialogueNames.size(); i++) {
         this->dialogueBox->push(dialogueTexts[i], dialogueNames[i], dialogueImages[i], dialogueSounds[i], true, false);
@@ -19,6 +21,9 @@ void Level::draw() {
     this->player->draw();
     for (int i = 0; i < this->platforms.size(); i++) {
         this->platforms[i]->draw();
+    }
+    for (int i = 0; i < this->pickups.size(); i++) {
+        this->pickups[i]->draw();
     }
     this->dialogueBox->draw();
 }

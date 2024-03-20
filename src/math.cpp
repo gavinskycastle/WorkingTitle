@@ -67,3 +67,9 @@ float sTPtextureY(float y) {
 Vector2 sTPvector2(Vector2 vector) {
     return Vector2{sTPtextureX(vector.x), sTPtextureY(vector.y)};
 }
+
+// Draw text centered both horizontally and vertically on the point given.
+void DrawTextCentered(const char* text, int posX, int posY, int fontSize, Color color) {
+    int textWidth = MeasureText(text, fontSize);
+    DrawText(text, posX-(textWidth/2), posY-(fontSize/2), fontSize, color);
+}

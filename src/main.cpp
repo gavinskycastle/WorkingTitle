@@ -8,6 +8,7 @@
 #include <vector>
 #include "level.hpp"
 #include "menu.hpp"
+#include "pickup.hpp"
 
 Color borderColor;
 Color backgroundColor;
@@ -21,6 +22,8 @@ Image testImage;
 Platform* testPlatform;
 
 Platform* ground;
+
+Pickup* testPickup;
 
 std::vector<Level*> levels;
 Level* currentLevel;
@@ -46,11 +49,14 @@ void init_app() {
     testPlatform = new Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5, false);
     ground = new Platform(10, 10, 600, 250, borderColor, fillColor, 0, 5, true);
     
+    testPickup = new Pickup(300, 300, "H");
+    
     levels = std::vector<Level*>{
         nullptr, // Level 0
         
         new Level(Vector2{100, 100}, // Level 1
             std::vector<Platform*>{testPlatform, ground},
+            std::vector<Pickup*>{testPickup},
             std::vector<std::string>{"The Narrator"},
             std::vector<std::string>{"The FitnessGram Pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter Pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets faster each minute after you hear this signal *boop*. A single lap should be completed each time you hear this sound *ding*. Remember to run in a straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on the word start."},
             std::vector<Image>{testImage},
@@ -59,6 +65,7 @@ void init_app() {
         
         new Level(Vector2{100, 100}, // Level 2
             std::vector<Platform*>{testPlatform, ground},
+            std::vector<Pickup*>{},
             std::vector<std::string>{},
             std::vector<std::string>{},
             std::vector<Image>{},
@@ -67,6 +74,7 @@ void init_app() {
         
         new Level(Vector2{100, 100}, // Level 3
             std::vector<Platform*>{testPlatform, ground},
+            std::vector<Pickup*>{},
             std::vector<std::string>{},
             std::vector<std::string>{},
             std::vector<Image>{},
