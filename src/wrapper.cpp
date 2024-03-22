@@ -21,9 +21,9 @@ int main(void)
 #if defined(PLATFORM_WEB)
     InitWindow(getBrowserWindowWidth(), getBrowserWindowHeight(), PROJECT_NAME);
 #else
-    InitWindow(1366, 768, PROJECT_NAME);
+    InitWindow(1366, 768, "Working Title");
 #endif
-    SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
+    // SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
     init_app();
 
 #if defined(PLATFORM_WEB)
