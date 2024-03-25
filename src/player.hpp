@@ -3,6 +3,7 @@
 
 #include "../libs/raylib/src/raylib.h"
 #include "platform.hpp"
+#include "pickup.hpp"
 
 enum PlayerState {
     CROUCHING,
@@ -29,7 +30,7 @@ class Player {
         Player(int x, int y, Color border_color, Color fill_color);
         void setPosition(int x, int y);
         void move(int dx, int dy);
-        void draw();
+        void draw(std::vector<Pickup*> pickups);
         void close();
     
     private:
@@ -40,6 +41,10 @@ class Player {
         Color fill_color;
         
         Platform* platform;
+        
+        Pickup* pickupBeingHeld;
+        bool holdingPickup = false;
+        
         PlayerState state;
         
         Vector2 leftArmOrigin = Vector2{0, 0};

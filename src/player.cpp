@@ -30,7 +30,7 @@ void Player::moveToFrame(LimbFrame frame, float seconds) {
     this->finalFrame = frame;
 }
 
-void Player::draw() {
+void Player::draw(std::vector<Pickup*> pickup) {
     bool flipTexture = false;
     
     BeginTextureMode(drawTexture);        
@@ -123,8 +123,14 @@ void Player::draw() {
         } else {
             this->timeSinceFrameStart += GetFrameTime();
             
-            this->leftArm = vectorLerp(this->originalFrame.leftArm, finalFrame.leftArm, this->timeSinceFrameStart/this->timeToNextFrame);
-            this->rightArm = vectorLerp(this->originalFrame.rightArm, finalFrame.rightArm, this->timeSinceFrameStart/this->timeToNextFrame);
+            if (this->holdingPickup) {
+                this->leftArm = Vector2{15, 47}; // Left arm
+                this->rightArm = Vector2{85, 47}; // Right arm
+                this->pickupBeingHeld->draw();
+            } else {
+                this->leftArm = vectorLerp(this->originalFrame.leftArm, finalFrame.leftArm, this->timeSinceFrameStart/this->timeToNextFrame);
+                this->rightArm = vectorLerp(this->originalFrame.rightArm, finalFrame.rightArm, this->timeSinceFrameStart/this->timeToNextFrame);
+            }
             this->leftLegLimb1 = vectorLerp(this->originalFrame.leftLegLimb1, finalFrame.leftLegLimb1, this->timeSinceFrameStart/this->timeToNextFrame);
             this->leftLegLimb2 = vectorLerp(this->originalFrame.leftLegLimb2, finalFrame.leftLegLimb2, this->timeSinceFrameStart/this->timeToNextFrame);
             this->leftLegLimb3 = vectorLerp(this->originalFrame.leftLegLimb3, finalFrame.leftLegLimb3, this->timeSinceFrameStart/this->timeToNextFrame);
@@ -132,6 +138,10 @@ void Player::draw() {
             this->rightLegLimb2 = vectorLerp(this->originalFrame.rightLegLimb2, finalFrame.rightLegLimb2, this->timeSinceFrameStart/this->timeToNextFrame);
             this->rightLegLimb3 = vectorLerp(this->originalFrame.rightLegLimb3, finalFrame.rightLegLimb3, this->timeSinceFrameStart/this->timeToNextFrame);
         }
+        
+        // Draw platform
+        this->platform->setPosition(70, 120);
+        this->platform->draw();
         
         // Draw limbs
         DrawLineEx(sTPvector2({leftArmOrigin.x, leftArmOrigin.y}), sTPvector2({leftArm.x, leftArm.y}), 7, WHITE); // Left arm
@@ -142,17 +152,33 @@ void Player::draw() {
         DrawLineEx(sTPvector2({rightLegOrigin.x, rightLegOrigin.y}), sTPvector2({rightLegLimb1.x, rightLegLimb1.y}), 7, WHITE); // Right leg 1
         DrawLineEx(sTPvector2({rightLegLimb1.x, rightLegLimb1.y}), sTPvector2({rightLegLimb2.x, rightLegLimb2.y}), 7, WHITE); // Right leg 2
         DrawLineEx(sTPvector2({rightLegLimb2.x, rightLegLimb2.y}), sTPvector2({rightLegLimb3.x, rightLegLimb3.y}), 7, WHITE); // Right leg 3
+    EndTextureMode();
         
-        // Draw platform
-            this->platform->setPosition(70, 120);
-            this->platform->draw();
-        EndTextureMode();
-        
-        if (flipTexture) {
-            DrawTextureRec(drawTexture.texture, Rectangle{0, 0, static_cast<float>(-drawTexture.texture.width), static_cast<float>(drawTexture.texture.height)}, Vector2{x-60, y-40}, WHITE);
-        } else {
-            DrawTexture(drawTexture.texture, x-60, y-40, WHITE);
+    if (flipTexture) {
+        DrawTextureRec(drawTexture.texture, Rectangle{0, 0, static_cast<float>(-drawTexture.texture.width), static_cast<float>(drawTexture.texture.height)}, Vector2{x-60, y-40}, WHITE);
+    } else {
+        DrawTexture(drawTexture.texture, x-60, y-40, WHITE);
+    }
+    
+    Rectangle playerRect = Rectangle{x, y, 100, 100};
+    
+    // Check if the key E has just been pressed
+    if (IsKeyPressed(KEY_E)) {
+        // Find the first, if any, pickup that the player is touching
+        for (int i = 0; i < pickup.size(); i++) {
+            if (CheckCollisionRecs(playerRect, pickup[i]->getRect())) {
+                if (this->holdingPickup) {
+                    pickup[i]->fill(this->pickupBeingHeld->getLabel());
+                    this->pickupBeingHeld = nullptr;
+                    this->holdingPickup = false;
+                } else {
+                    this->pickupBeingHeld = new Pickup(pickup[i]->x, pickup[i]->y, pickup[i]->getLabel(), true);
+                    this->holdingPickup = true;
+                }
+                break;
+            }
         }
+    }
 }
 
 void Player::close() {

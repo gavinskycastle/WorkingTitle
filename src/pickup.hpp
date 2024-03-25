@@ -6,14 +6,19 @@
 
 class Pickup {
     public:
-        Pickup(int x, int y, std::string label);
+        Pickup(int x, int y, std::string label, bool attachedToPlayer);
         void draw();
-        void drop(std::string label);
-    
-    private:
+        void empty();
+        void fill(std::string label);
+        Rectangle getRect();
+        std::string getLabel();
+        
         int x;
         int y;
+    
+    private:
         bool isFilled;
+        bool attachedToPlayer;
         std::string label;
         
         Color fillColor = Color{187, 124, 86, 255};

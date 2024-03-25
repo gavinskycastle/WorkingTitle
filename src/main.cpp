@@ -49,7 +49,7 @@ void init_app() {
     testPlatform = new Platform(100, 100, 100, 100, borderColor, fillColor, 0, 5, false);
     ground = new Platform(10, 10, 600, 250, borderColor, fillColor, 0, 5, true);
     
-    testPickup = new Pickup(300, 300, "H");
+    testPickup = new Pickup(300, 400, "H", false);
     
     levels = std::vector<Level*>{
         nullptr, // Level 0

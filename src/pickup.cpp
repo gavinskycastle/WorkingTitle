@@ -2,18 +2,38 @@
 #include "../libs/raylib/src/raylib.h"
 #include "math.hpp"
 
-Pickup::Pickup(int x, int y, std::string label) {
+Pickup::Pickup(int x, int y, std::string label, bool attachedToPlayer) {
     this->x = x;
     this->y = y;
     this->isFilled = true;
     this->label = label;
+    this->attachedToPlayer = attachedToPlayer;
 }
 
 void Pickup::draw() {
-    if (this->isFilled) {
+    if (!attachedToPlayer)
         DrawTexture(blankPickupTexture, this->x, this->y, WHITE);
+    if (this->isFilled) {
         DrawCircle(this->x+35, this->y+35, 35, this->borderColor);
         DrawCircle(this->x+35, this->y+35, 30, this->fillColor);
         DrawTextCentered(this->label.c_str(), this->x+35, this->y+35, 35, BLACK);
     }
+}
+
+void Pickup::empty() {
+    this->isFilled = false;
+    this->label = "";
+}
+
+void Pickup::fill(std::string label) {
+    this->isFilled = true;
+    this->label = label;
+}
+
+Rectangle Pickup::getRect() {
+    return Rectangle{static_cast<float>(this->x), static_cast<float>(this->y), 70.0f, 70.0f};
+}
+
+std::string Pickup::getLabel() {
+    return this->label;
 }
