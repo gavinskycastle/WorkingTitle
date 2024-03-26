@@ -126,7 +126,6 @@ void Player::draw(std::vector<Pickup*> pickup) {
             if (this->holdingPickup) {
                 this->leftArm = Vector2{15, 47}; // Left arm
                 this->rightArm = Vector2{85, 47}; // Right arm
-                this->pickupBeingHeld->draw();
             } else {
                 this->leftArm = vectorLerp(this->originalFrame.leftArm, finalFrame.leftArm, this->timeSinceFrameStart/this->timeToNextFrame);
                 this->rightArm = vectorLerp(this->originalFrame.rightArm, finalFrame.rightArm, this->timeSinceFrameStart/this->timeToNextFrame);
@@ -152,6 +151,9 @@ void Player::draw(std::vector<Pickup*> pickup) {
         DrawLineEx(sTPvector2({rightLegOrigin.x, rightLegOrigin.y}), sTPvector2({rightLegLimb1.x, rightLegLimb1.y}), 7, WHITE); // Right leg 1
         DrawLineEx(sTPvector2({rightLegLimb1.x, rightLegLimb1.y}), sTPvector2({rightLegLimb2.x, rightLegLimb2.y}), 7, WHITE); // Right leg 2
         DrawLineEx(sTPvector2({rightLegLimb2.x, rightLegLimb2.y}), sTPvector2({rightLegLimb3.x, rightLegLimb3.y}), 7, WHITE); // Right leg 3
+        
+        if (this->holdingPickup && this->pickupBeingHeld != nullptr)
+            this->pickupBeingHeld->draw();
     EndTextureMode();
         
     if (flipTexture) {
@@ -172,7 +174,8 @@ void Player::draw(std::vector<Pickup*> pickup) {
                     this->pickupBeingHeld = nullptr;
                     this->holdingPickup = false;
                 } else {
-                    this->pickupBeingHeld = new Pickup(pickup[i]->x, pickup[i]->y, pickup[i]->getLabel(), true);
+                    this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), pickup[i]->getLabel(), true, true);
+                    pickup[i]->empty();
                     this->holdingPickup = true;
                 }
                 break;

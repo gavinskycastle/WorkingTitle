@@ -6,12 +6,13 @@
 
 class Pickup {
     public:
-        Pickup(int x, int y, std::string label, bool attachedToPlayer);
+        Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled);
         void draw();
         void empty();
         void fill(std::string label);
         Rectangle getRect();
         std::string getLabel();
+        void setPosition(int x, int y);
         
         int x;
         int y;

@@ -2,10 +2,10 @@
 #include "../libs/raylib/src/raylib.h"
 #include "math.hpp"
 
-Pickup::Pickup(int x, int y, std::string label, bool attachedToPlayer) {
+Pickup::Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled) {
     this->x = x;
     this->y = y;
-    this->isFilled = true;
+    this->isFilled = isFilled;
     this->label = label;
     this->attachedToPlayer = attachedToPlayer;
 }
@@ -36,4 +36,9 @@ Rectangle Pickup::getRect() {
 
 std::string Pickup::getLabel() {
     return this->label;
+}
+
+void Pickup::setPosition(int x, int y) {
+    this->x = x;
+    this->y = y;
 }
