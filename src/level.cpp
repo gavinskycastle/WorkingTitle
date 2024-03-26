@@ -18,13 +18,13 @@ Level::Level(Vector2 startPosition, std::vector<Platform*> platforms,
 }
 
 void Level::draw() {
-    this->player->draw(pickups);
     for (int i = 0; i < this->platforms.size(); i++) {
         this->platforms[i]->draw();
     }
     for (int i = 0; i < this->pickups.size(); i++) {
         this->pickups[i]->draw();
     }
+    this->player->draw(pickups);
     this->dialogueBox->draw();
 }
 

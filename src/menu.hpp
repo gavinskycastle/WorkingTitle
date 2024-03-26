@@ -13,7 +13,10 @@ class Menu {
         Menu(Color borderColor, Color fillColor, Color textColor);
         // Returns whether the window should close or not
         MenuState draw();
+        MenuState drawExit();
         void close();
+        
+        int selectedLevel = 0;
     
     private:
         Color borderColor;
@@ -21,8 +24,6 @@ class Menu {
         Color textColor;
         
         Texture2D logoTexture;
-        
-        int selectedLevel = 0;
 };
 
 #endif // MENU_H

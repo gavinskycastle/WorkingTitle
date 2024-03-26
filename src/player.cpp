@@ -9,7 +9,7 @@ Player::Player(int x, int y, Color border_color, Color fill_color) {
     this->border_color = border_color;
     this->fill_color = fill_color;
     
-    this->platform = new Platform(16, 45, 100, 35, border_color, fill_color, 0, 5, false);
+    this->platform = new Platform(16, 45, 100, 35, border_color, fill_color, 0, 5, false, true);
 }
 
 void Player::setPosition(int x, int y) {
@@ -162,7 +162,7 @@ void Player::draw(std::vector<Pickup*> pickup) {
         DrawTexture(drawTexture.texture, x-60, y-40, WHITE);
     }
     
-    Rectangle playerRect = Rectangle{x, y, 100, 100};
+    Rectangle playerRect = Rectangle{x, y-25, 100, 125};
     
     // Check if the key E has just been pressed
     if (IsKeyPressed(KEY_E)) {
@@ -173,7 +173,7 @@ void Player::draw(std::vector<Pickup*> pickup) {
                     pickup[i]->fill(this->pickupBeingHeld->getLabel());
                     this->pickupBeingHeld = nullptr;
                     this->holdingPickup = false;
-                } else {
+                } else if (pickup[i]->isFilled) {
                     this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), pickup[i]->getLabel(), true, true);
                     pickup[i]->empty();
                     this->holdingPickup = true;

@@ -48,6 +48,20 @@ MenuState Menu::draw() {
     return MenuState{this->selectedLevel, !exit};
 };
 
+MenuState Menu::drawExit() {
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 25);
+    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, ColorToInt(this->fillColor));
+    GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, ColorToInt(this->textColor));
+    GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, ColorToInt(this->borderColor));
+    GuiSetStyle(BUTTON, BORDER_WIDTH, 4);
+    if (GuiButton(Rectangle {10.0f, 10.0f, 200, 50}, "Go to main menu") == 1) {
+        this->selectedLevel = 0;
+    };
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
+    
+    return MenuState{this->selectedLevel, true};
+};
+
 void Menu::close() {
     
 };

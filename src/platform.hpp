@@ -14,19 +14,14 @@ enum PlatformRotation {
 
 class Platform {
     public:
+        Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness, bool is_ground, bool use_old_rendering);
         Platform(int x, int y, int width, int height, Color border_color, Color fill_color, float angle, int line_thickness, bool is_ground);
         void attach(Platform *platform, PlatformRotation rotation);
         void detach();
-        // void rotate(int degrees);
         void setPosition(int x, int y);
         void move(int dx, int dy);
         void enlarge(int dw, int dh);
         void scale(int wm, int hm);
-        // void updateAngle();
-        // std::vector<Vector2> getOuterPoints();
-        // std::vector<Vector2> getInnerPoints();
-        // Vector2 getCenterPoint();
-        // Vector2 getEndPosition();
         void draw();
 
     private:
@@ -44,8 +39,7 @@ class Platform {
         Texture2D border_color_texture;
         Texture2D fill_color_texture;
         bool is_ground;
-        // std::vector<Vector2> getOuterPoints(bool rotate);
-        // std::vector<Vector2> getInnerPoints(std::vector<Vector2> outer_points, bool rotate = true);
+        bool use_old_rendering;
 };
 
 #endif // PLATFORM_H

@@ -16,9 +16,10 @@ class Pickup {
         
         int x;
         int y;
+        
+        bool isFilled;
     
     private:
-        bool isFilled;
         bool attachedToPlayer;
         std::string label;
         
