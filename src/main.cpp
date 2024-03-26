@@ -56,11 +56,11 @@ Level* level1Factory() {
             new Pickup(1200, 500, " ", false, true)},
             std::vector<std::string>{"The Narrator", "The Narrator"},
             std::vector<std::string>{
-                "This level will test your knowledge of basic English grammar. Place the punctuation marks in the correct slots to complete the sentences. Good luck!",
+                "This level will test your knowledge of basic English grammar. Place the punctuation marks in the correct slots to complete the sentence. Good luck!",
                 "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press WASD to move and jump, shift to sprint, E to pick up and place each of the objects in the slots, and space to skip this dialogue."
                 },
             std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
-            std::vector<Sound>{LoadSound("assets/testSound.ogg"), LoadSound("assets/testSound.ogg")},
+            std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
             borderColor, fillColor, textColor);
 }
 
