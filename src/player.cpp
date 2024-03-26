@@ -170,6 +170,8 @@ void Player::draw(std::vector<Pickup*> pickup) {
         for (int i = 0; i < pickup.size(); i++) {
             if (CheckCollisionRecs(playerRect, pickup[i]->getRect())) {
                 if (this->holdingPickup) {
+                    if (pickup[i]->isFilled) 
+                        break;
                     pickup[i]->fill(this->pickupBeingHeld->getLabel());
                     this->pickupBeingHeld = nullptr;
                     this->holdingPickup = false;
@@ -178,7 +180,6 @@ void Player::draw(std::vector<Pickup*> pickup) {
                     pickup[i]->empty();
                     this->holdingPickup = true;
                 }
-                break;
             }
         }
     }

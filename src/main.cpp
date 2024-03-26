@@ -155,6 +155,17 @@ bool app_loop() {
                 //std::cout << "Rectangle for the text '" << englishTextToRender[i].c_str() << "': " << "x: " << x-12 << ", y: " << 340 << ", width: " << textWidth+24 << ", height: " << 50 << std::endl;
                 x += textWidth + 82;
             }
+            
+            if ((*currentLevel->pickups[0]).getLabel() == "-"
+              && (*currentLevel->pickups[1]).getLabel() == "-"
+               && (*currentLevel->pickups[2]).getLabel() == " "
+                && (*currentLevel->pickups[3]).getLabel() == ":"
+                 && (*currentLevel->pickups[4]).getLabel() == ","
+                  && (*currentLevel->pickups[5]).getLabel() == ","
+                   && (*currentLevel->pickups[6]).getLabel() == ".") {
+                // Draw centered green text
+                DrawText("Correct!", GetScreenWidth()/2 - MeasureText("Correct", 50)/2, GetScreenHeight()/2 - 250, 50, GREEN);
+            }
         }
         
     EndDrawing();
