@@ -6,6 +6,7 @@
 #include "player.hpp"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "level.hpp"
 #include "menu.hpp"
 #include "pickup.hpp"
@@ -159,15 +160,30 @@ bool app_loop() {
                 x += textWidth + 82;
             }
             
-            if ((*currentLevel->pickups[0]).getLabel() == "-"
-              && (*currentLevel->pickups[1]).getLabel() == "-"
-               && (*currentLevel->pickups[2]).getLabel() == " "
-                && (*currentLevel->pickups[3]).getLabel() == ":"
-                 && (*currentLevel->pickups[4]).getLabel() == ","
-                  && (*currentLevel->pickups[5]).getLabel() == ","
-                   && (*currentLevel->pickups[6]).getLabel() == ".") {
+            int numberCorrect = 0;
+            if ((*currentLevel->pickups[0]).getLabel() == "-") numberCorrect++;
+            if ((*currentLevel->pickups[1]).getLabel() == "-") numberCorrect++;
+            if ((*currentLevel->pickups[2]).getLabel() == " ") numberCorrect++;
+            if ((*currentLevel->pickups[3]).getLabel() == ":") numberCorrect++;
+            if ((*currentLevel->pickups[4]).getLabel() == ",") numberCorrect++;
+            if ((*currentLevel->pickups[5]).getLabel() == ",") numberCorrect++;
+            if ((*currentLevel->pickups[6]).getLabel() == ".") numberCorrect++;
+            
+            if (numberCorrect == 7) {
                 // Draw centered green text
                 DrawText("Correct!", GetScreenWidth()/2 - MeasureText("Correct", 50)/2, GetScreenHeight()/2 - 250, 50, GREEN);
+            } else if (
+                // Check if all pickups are filled
+                (*currentLevel->pickups[0]).isFilled &&
+                (*currentLevel->pickups[1]).isFilled &&
+                (*currentLevel->pickups[2]).isFilled &&
+                (*currentLevel->pickups[3]).isFilled &&
+                (*currentLevel->pickups[4]).isFilled &&
+                (*currentLevel->pickups[5]).isFilled &&
+                (*currentLevel->pickups[6]).isFilled
+            ) {
+                // Draw centered red text
+                DrawText((std::to_string(numberCorrect) + "/7 correct").c_str(), GetScreenWidth()/2 - MeasureText((std::to_string(numberCorrect) + "/7 correct").c_str(), 50)/2, GetScreenHeight()/2 - 250, 50, RED);
             }
         }
         
