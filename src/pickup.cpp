@@ -16,7 +16,7 @@ void Pickup::draw() {
     if (this->isFilled) {
         DrawCircle(this->x+35, this->y+35, 35, this->borderColor);
         DrawCircle(this->x+35, this->y+35, 30, this->fillColor);
-        DrawTextCentered(this->label.c_str(), this->x+35, this->y+35, 35, BLACK);
+        DrawTextCenteredEx(this->label.c_str(), this->x+35, this->y+30, 70, BLACK, serifFont, 1.0f);
     }
 }
 

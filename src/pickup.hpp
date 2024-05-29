@@ -27,6 +27,7 @@ class Pickup {
         Color borderColor = Color{71, 35, 11, 255};
         
         Texture2D blankPickupTexture = LoadTextureFromImage(LoadImage("assets/blankPickup.png"));
+        Font serifFont = LoadFont("assets/PlayfairDisplay-Bold.ttf");
 };
 
 #endif // PICKUP_H

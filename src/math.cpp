@@ -73,3 +73,9 @@ void DrawTextCentered(const char* text, int posX, int posY, int fontSize, Color 
     int textWidth = MeasureText(text, fontSize);
     DrawText(text, posX-(textWidth/2), posY-(fontSize/2), fontSize, color);
 }
+
+// Draw text centered both horizontally and vertically on the point given with a custom font.
+void DrawTextCenteredEx(const char* text, int posX, int posY, int fontSize, Color color, Font font, float spacing) {
+    int textWidth = MeasureTextEx(font, text, fontSize, spacing).x;
+    DrawTextEx(font, text, Vector2{posX-(static_cast<float>(textWidth)/2), posY-(static_cast<float>(fontSize)/2)}, fontSize, spacing, color);
+}
