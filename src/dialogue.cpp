@@ -38,7 +38,7 @@ void DialogueBox::draw() {
             
             // Calcuate dialogue scroll speed based on sound duration.
             // Use doubles during calculation then cast to int.
-            this->dialogueScrollSpeed = static_cast<int>(60.0 / (static_cast<double>(this->dialogueQueue[0].text.length()) / (static_cast<double>(this->dialogueQueue[0].sound.frameCount) / 48000.0)));
+            this->dialogueScrollSpeed = static_cast<int>(30.0 / (static_cast<double>(this->dialogueQueue[0].text.length()) / (static_cast<double>(this->dialogueQueue[0].sound.frameCount) / 48000.0)));
         }
         
         // Add characters to the displayed text at the speed of dialogueScrollSpeed. (Do this once per second.)
