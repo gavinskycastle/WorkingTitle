@@ -29,6 +29,8 @@ MenuState menuState = MenuState{0, true};
 Platform* ground;
 std::vector<std::string> englishTextToRender;
 
+Texture2D level2text;
+
 int selectedLevel = 0;
 
 Level* level1Factory() {
@@ -68,15 +70,24 @@ Level* level1Factory() {
 
 Level* level2Factory() {
     return new Level(Vector2{100, 400}, // Level 2: Chemistry based level
-        std::vector<Platform*>{ground},
-        std::vector<Pickup*>{},
-        std::vector<std::string>{"The Narrator", "The Narrator"},
-        std::vector<std::string>{
-            "This level will test your knowledge of atomic bonds. Place the elements in the correct slots to complete the specified molecule. Good luck!",
-            "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press WASD to move and jump, shift to sprint, E to pick up and place each of the objects in the slots, and space to skip this dialogue."
+        std::vector<Platform*>{ground, new Platform(400, 150, 550, 300, borderColorAlt, fillColorAlt, 0, 5, false)},
+        std::vector<Pickup*>{
+            new Pickup(400, 500, "O", false, true),
+            new Pickup(600, 500, "O", false, true),
+            new Pickup(800, 500, "O", false, true),
+            new Pickup(1000, 500, "O", false, true),
+            new Pickup(1200, 500, "H", false, true),
+            new Pickup(1400, 500, "H", false, true),
+            new Pickup(1600, 500, "S", false, true),
         },
-        std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
-        std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
+        std::vector<std::string>{"The Narrator", "The Narrator", "The Narrator"},
+        std::vector<std::string>{
+            "Controls:\n\n - WASD to move\n\n - Space to jump\n\n - P to pick up and place objects\n\n - Shift to sprint",
+            "This level will test your knowledge of atomic bonds. Place the elements in the correct slots to complete the specified molecule. Once all atoms have been placed, you will be told whether your arrangement of atoms is correct or not. Press enter to continue.",
+            "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press enter to continue."
+            },
+        std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
+        std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
         borderColor, fillColor, textColor);
 }
 
@@ -106,11 +117,12 @@ void init_app() {
     
     ground = new Platform(0, 585, 1920, 540, borderColor, fillColor, 0, 5, true);
     
+    level2text = LoadTexture("assets/level2text.png");
+    
     englishTextToRender = std::vector<std::string>{"The sixteen", "year", "old", "student introduced his friends", "Natalie", "Jackson", "and Ethan"};
     
     levels = std::vector<Level*>{
         nullptr, // Level 0
-       
         
         level1Factory(), // Level 1: English based level
         
@@ -187,6 +199,8 @@ bool app_loop() {
                 // Draw centered red text
                 DrawText((std::to_string(numberCorrect) + "/7 correct").c_str(), GetScreenWidth()/2 - MeasureText((std::to_string(numberCorrect) + "/7 correct").c_str(), 50)/2, GetScreenHeight()/2 - 250, 50, RED);
             }
+        } else if (selectedLevel == 2) {
+            DrawTexture(level2text, 400, 150, WHITE);
         }
         
     EndDrawing();
