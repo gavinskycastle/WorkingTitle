@@ -70,8 +70,25 @@ Level* level1Factory() {
 
 Level* level2Factory() {
     return new Level(Vector2{100, 400}, // Level 2: Chemistry based level
-        std::vector<Platform*>{ground, new Platform(400, 150, 550, 300, borderColorAlt, fillColorAlt, 0, 5, false)},
+        std::vector<Platform*>{ground, new Platform(400, 150, 550, 300, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1070, 295, 50, 20, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1190, 295, 110, 20, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1370, 295, 110, 20, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1550, 295, 50, 20, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1313, 190, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1338, 190, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1313, 340, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
+            new Platform(1338, 340, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
+            
+        },
         std::vector<Pickup*>{
+            new Pickup(1000, 270, "", false, false),
+            new Pickup(1120, 270, "", false, false),
+            new Pickup(1300, 270, "", false, false),
+            new Pickup(1480, 270, "", false, false),
+            new Pickup(1600, 270, "", false, false),
+            new Pickup(1300, 120, "", false, false),
+            new Pickup(1300, 420, "", false, false),
             new Pickup(400, 500, "O", false, true),
             new Pickup(600, 500, "O", false, true),
             new Pickup(800, 500, "O", false, true),

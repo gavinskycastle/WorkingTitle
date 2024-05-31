@@ -44,7 +44,7 @@ void Player::draw(std::vector<Pickup*> pickup) {
         
         // Jump key press detection
         if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_SPACE)) && this->gravity == 0) {
-            this->gravity = -10;
+            this->gravity = -18;
             bool justJumped = true;
         }
         
