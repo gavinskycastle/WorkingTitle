@@ -31,7 +31,7 @@ void Pickup::fill(std::string label) {
 }
 
 Rectangle Pickup::getRect() {
-    return Rectangle{static_cast<float>(this->x), static_cast<float>(this->y), 70.0f, 70.0f};
+    return Rectangle{static_cast<float>(this->x), static_cast<float>(this->y+20), 70.0f, 50.0f};
 }
 
 std::string Pickup::getLabel() {

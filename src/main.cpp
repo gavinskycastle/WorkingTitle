@@ -48,20 +48,21 @@ Level* level1Factory() {
             new Pickup(1405+123-6, 330, "", false, false),
             new Pickup(1586+147-6, 330, "", false, false),
             
-            new Pickup(600, 500, ",", false, true),
-            new Pickup(700, 500, "-", false, true),
+            new Pickup(400, 500, ",", false, true),
+            new Pickup(600, 500, "-", false, true),
             new Pickup(800, 500, ",", false, true),
-            new Pickup(900, 500, "-", false, true),
-            new Pickup(1000, 500, ":", false, true),
-            new Pickup(1100, 500, ".", false, true),
-            new Pickup(1200, 500, " ", false, true)},
-            std::vector<std::string>{"The Narrator", "The Narrator"},
+            new Pickup(1000, 500, "-", false, true),
+            new Pickup(1200, 500, ":", false, true),
+            new Pickup(1400, 500, ".", false, true),
+            new Pickup(1600, 500, " ", false, true)},
+            std::vector<std::string>{"The Narrator", "The Narrator", "The Narrator"},
             std::vector<std::string>{
-                "This level will test your knowledge of basic English grammar. Place the punctuation marks in the correct slots to complete the sentence. Once all punctuation marks have been placed, you will be told whether your use of punctuation is correct or not. Good luck!",
-                "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press WASD to move and jump, shift to sprint, E to pick up and place each of the objects in the slots, and space to skip this dialogue."
+                "Controls:\n\n - WASD to move\n\n - Space to jump\n\n - P to pick up and place objects\n\n - Shift to sprint",
+                "This level will test your knowledge of basic English grammar. Place the punctuation marks in the correct slots to complete the sentence. Once all punctuation marks have been placed, you will be told whether your use of punctuation is correct or not. Press enter to continue.",
+                "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press enter to continue."
                 },
-            std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
-            std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
+            std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
+            std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
             borderColor, fillColor, textColor);
 }
 
@@ -110,6 +111,7 @@ void init_app() {
     levels = std::vector<Level*>{
         nullptr, // Level 0
        
+        
         level1Factory(), // Level 1: English based level
         
         level2Factory(), // Level 2: Chemistry based level

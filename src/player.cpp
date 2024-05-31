@@ -43,14 +43,14 @@ void Player::draw(std::vector<Pickup*> pickup) {
         DrawCircle(sTPtextureX((100/2)+15), sTPtextureY(-(35/2)), 10, WHITE);
         
         // Jump key press detection
-        if (IsKeyPressed(KEY_W) && this->gravity == 0) {
+        if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_SPACE)) && this->gravity == 0) {
             this->gravity = -10;
             bool justJumped = true;
         }
         
         // Left and right movement key press detection
         if (IsKeyDown(KEY_A)) {
-            if (IsKeyDown(KEY_LEFT_SHIFT))
+            if (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT))
                 dx -= 10;
             else
                 dx -= 5;
@@ -59,7 +59,7 @@ void Player::draw(std::vector<Pickup*> pickup) {
             DrawCircle(sTPtextureX((100/2)+15+3), sTPtextureY(-(35/2)), 5, BLACK);
         }
         else if (IsKeyDown(KEY_D)) {
-            if (IsKeyDown(KEY_LEFT_SHIFT))
+            if (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT))
                 dx += 10;
             else
                 dx += 5;
@@ -164,8 +164,8 @@ void Player::draw(std::vector<Pickup*> pickup) {
     
     Rectangle playerRect = Rectangle{x, y-25, 100, 125};
     
-    // Check if the key E has just been pressed
-    if (IsKeyPressed(KEY_E)) {
+    // Check if the key P has just been pressed
+    if (IsKeyPressed(KEY_P)) {
         // Find the first, if any, pickup that the player is touching
         for (int i = 0; i < pickup.size(); i++) {
             if (CheckCollisionRecs(playerRect, pickup[i]->getRect())) {

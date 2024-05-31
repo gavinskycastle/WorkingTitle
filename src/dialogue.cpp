@@ -129,7 +129,7 @@ void DialogueBox::draw() {
         }
         
         // If the up arrow key or spacebar is pressed and the text is scrolling, skip to the end of the text. If the text is not scrolling, remove the current dialogue from the queue.
-        if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_SPACE)) {
+        if (IsKeyPressed(KEY_ENTER)) {
             if (this->displayedText.length() < this->dialogueQueue[0].text.length()) {
                 this->displayedText = this->dialogueQueue[0].text;
             }
