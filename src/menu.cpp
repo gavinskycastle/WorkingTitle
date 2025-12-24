@@ -26,27 +26,27 @@ MenuState Menu::draw() {
     GuiSetStyle(BUTTON, TEXT_COLOR_NORMAL, ColorToInt(this->textColor));
     GuiSetStyle(BUTTON, BORDER_COLOR_NORMAL, ColorToInt(this->borderColor));
     GuiSetStyle(BUTTON, BORDER_WIDTH, 4);
-    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2-150, 300, 75}, "Play demo level 1") == 1) {
+    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2-100, 300, 75}, "Grammar demo level") == 1) {
         this->selectedLevel = 1;
     };
-    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2-50, 300, 75}, "Play demo level 2") == 1) {
+    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2, 300, 75}, "Chemistry demo level") == 1) {
         this->selectedLevel = 2;
     };
-    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+50, 300, 75}, "Play demo level 3") == 1) {
-        this->selectedLevel = 3;
-    };
-    if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+150, 300, 75}, "Options") == 1) {
-        std::cout << "Options" << std::endl;
-    };
+    // if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+50, 300, 75}, "Play demo level 3") == 1) {
+    //     this->selectedLevel = 3;
+    // };
+    // if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+150, 300, 75}, "Options") == 1) {
+    //     std::cout << "Options" << std::endl;
+    // };
     #ifndef PLATFORM_WEB
-        if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+250, 300, 75}, "Exit") == 1) {
+        if (GuiButton(Rectangle {static_cast<float>(GetScreenWidth())/2-150, static_cast<float>(GetScreenHeight())/2+100, 300, 75}, "Exit") == 1) {
             exit = true;
         };
     #endif
     GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
     
     // Draw version number in white at the bottom center of the screen
-    DrawText("v0.2.0", GetScreenWidth()/2 - MeasureText("v0.2.0", 24)/2, GetScreenHeight()-30, 24, WHITE);
+    DrawText("v0.2.1", GetScreenWidth()/2 - MeasureText("v0.2.1", 24)/2, GetScreenHeight()-30, 24, WHITE);
     
     return MenuState{this->selectedLevel, !exit};
 };

@@ -2,6 +2,8 @@
 #include "helper.hpp"
 #include "main.hpp"
 
+#include <filesystem>
+
 void web_loop()
 {
     static int old_w = 0, old_h = 0;
@@ -22,6 +24,14 @@ int main(void)
     InitWindow(getBrowserWindowWidth(), getBrowserWindowHeight(), PROJECT_NAME);
 #else
     InitWindow(1366, 768, "Working Title");
+    Image windowIcon;
+    if (std::filesystem::exists("../assets") == false) {
+       windowIcon = LoadImage("assets/icon.png");
+       SetWindowIcon(windowIcon);
+    } else {
+        windowIcon = LoadImage("../assets/icon.png");
+        SetWindowIcon(windowIcon);
+    }
 #endif
     SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
     init_app();
