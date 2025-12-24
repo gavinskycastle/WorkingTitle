@@ -46,7 +46,7 @@ MenuState Menu::draw() {
     GuiSetStyle(DEFAULT, TEXT_SIZE, 16);
     
     // Draw version number in white at the bottom center of the screen
-    DrawText("v0.2.1", GetScreenWidth()/2 - MeasureText("v0.2.1", 24)/2, GetScreenHeight()-30, 24, WHITE);
+    DrawText("v0.3.0", GetScreenWidth()/2 - MeasureText("v0.3.0", 24)/2, GetScreenHeight()-30, 24, WHITE);
     
     return MenuState{this->selectedLevel, !exit};
 };

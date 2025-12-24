@@ -27,11 +27,10 @@ int main(void)
     Image windowIcon;
     if (std::filesystem::exists("../assets") == false) {
        windowIcon = LoadImage("assets/icon.png");
-       SetWindowIcon(windowIcon);
     } else {
         windowIcon = LoadImage("../assets/icon.png");
-        SetWindowIcon(windowIcon);
     }
+    SetWindowIcon(windowIcon);
 #endif
     SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
     init_app();
