@@ -137,7 +137,7 @@ void init_app() {
     borderColorAlt = Color{71, 35, 11, 255};
     fillColorAlt = Color{187, 124, 86, 255};
     
-    ground = new Platform(0, 585, 1920, 540, borderColor, fillColor, 0, 5, true);
+    ground = new Platform(0, 585, 2800, 540, borderColor, fillColor, 0, 5, true);
     
     level2text = LoadTexture("assets/level2text.png");
     
