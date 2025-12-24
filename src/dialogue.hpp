@@ -7,10 +7,10 @@
 #include "../libs/raylib/src/raylib.h"
 
 struct Dialogue {
-    Texture2D image;
+    Texture* image;
     std::string name;
     std::string text;
-    Sound sound;
+    Sound* sound;
     
     bool skippable;
     bool autoSkip;
@@ -24,7 +24,7 @@ class DialogueBox {
         void clear();
         
         // Pushes a new dialogue onto the queue.
-        void push(std::string text, std::string name, Image image, Sound sound, bool skippable, bool autoSkip);
+        void push(std::string text, std::string name, Texture* image, Sound* sound, bool skippable, bool autoSkip);
         
         // Draws and updates the dialogue box onscreen. Should be called every frame.
         void draw();

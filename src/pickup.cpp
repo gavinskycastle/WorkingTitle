@@ -2,21 +2,23 @@
 #include "../libs/raylib/src/raylib.h"
 #include "math.hpp"
 
-Pickup::Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled) {
+Pickup::Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled, Texture2D* blankPickupTexture, Font* serifFont) {
     this->x = x;
     this->y = y;
     this->isFilled = isFilled;
     this->label = label;
     this->attachedToPlayer = attachedToPlayer;
+    this->blankPickupTexture = blankPickupTexture;
+    this->serifFont = serifFont;
 }
 
 void Pickup::draw() {
     if (!attachedToPlayer)
-        DrawTexture(blankPickupTexture, this->x, this->y, WHITE);
+        DrawTexture(*blankPickupTexture, this->x, this->y, WHITE);
     if (this->isFilled) {
         DrawCircle(this->x+35, this->y+35, 35, this->borderColor);
         DrawCircle(this->x+35, this->y+35, 30, this->fillColor);
-        DrawTextCenteredEx(this->label.c_str(), this->x+35, this->y+30, 70, BLACK, serifFont, 1.0f);
+        DrawTextCenteredEx(this->label.c_str(), this->x+35, this->y+30, 70, BLACK, *serifFont, 1.0f);
     }
 }
 

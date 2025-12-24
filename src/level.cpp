@@ -4,8 +4,8 @@ Level::Level(Vector2 startPosition, std::vector<Platform*> platforms,
     std::vector<Pickup*> pickups,
     std::vector<std::string> dialogueNames,
     std::vector<std::string> dialogueTexts,
-    std::vector<Image> dialogueImages,
-    std::vector<Sound> dialogueSounds,
+    std::vector<Texture*> dialogueImages,
+    std::vector<Sound*> dialogueSounds,
     Color border_color, Color fill_color, Color text_color)
 {
     this->player = new Player(startPosition.x, startPosition.y, border_color, fill_color);

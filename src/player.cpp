@@ -174,14 +174,14 @@ void Player::draw(std::vector<Pickup*> pickup) {
                         std::string newLabel = pickup[i]->getLabel();
                         pickup[i]->empty();
                         pickup[i]->fill(this->pickupBeingHeld->getLabel());
-                        this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), newLabel, true, true);
+                        this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), newLabel, true, true, pickup[i]->blankPickupTexture, pickup[i]->serifFont);
                     } else {
                         pickup[i]->fill(this->pickupBeingHeld->getLabel());
                         this->pickupBeingHeld = nullptr;
                         this->holdingPickup = false;
                     }
                 } else if (pickup[i]->isFilled) {
-                    this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), pickup[i]->getLabel(), true, true);
+                    this->pickupBeingHeld = new Pickup(sTPtextureX(15), sTPtextureY(77), pickup[i]->getLabel(), true, true, pickup[i]->blankPickupTexture, pickup[i]->serifFont);
                     pickup[i]->empty();
                     this->holdingPickup = true;
                 }

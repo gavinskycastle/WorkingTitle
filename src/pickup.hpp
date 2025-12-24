@@ -6,7 +6,7 @@
 
 class Pickup {
     public:
-        Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled);
+        Pickup(int x, int y, std::string label, bool attachedToPlayer, bool isFilled, Texture2D* blankPickupTexture, Font* serifFont);
         void draw();
         void empty();
         void fill(std::string label);
@@ -18,6 +18,9 @@ class Pickup {
         int y;
         
         bool isFilled;
+        
+        Texture2D* blankPickupTexture;
+        Font* serifFont;
     
     private:
         bool attachedToPlayer;
@@ -25,9 +28,6 @@ class Pickup {
         
         Color fillColor = Color{187, 124, 86, 255};
         Color borderColor = Color{71, 35, 11, 255};
-        
-        Texture2D blankPickupTexture = LoadTextureFromImage(LoadImage("assets/blankPickup.png"));
-        Font serifFont = LoadFont("assets/PlayfairDisplay-Bold.ttf");
 };
 
 #endif // PICKUP_H

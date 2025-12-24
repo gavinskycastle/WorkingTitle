@@ -11,8 +11,8 @@ class Level {
     std::vector<Pickup*> pickups,
     std::vector<std::string> dialogueNames,
     std::vector<std::string> dialogueTexts,
-    std::vector<Image> dialogueImages,
-    std::vector<Sound> dialogueSounds,
+    std::vector<Texture*> dialogueImages,
+    std::vector<Sound*> dialogueSounds,
     Color border_color, Color fill_color, Color text_color);
         void draw();
         void close();

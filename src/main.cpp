@@ -33,7 +33,13 @@ Texture2D level2text;
 
 int selectedLevel = 0;
 
-Level* level1Factory() {
+Sound emptySound;
+Texture narratorTexture;
+
+Texture2D blankPickupTexture; 
+Font serifFont;
+
+Level* level1Factory(Texture* image, Sound* sound) {
     return new Level(Vector2{100, 450}, // Level 1: English based level
             std::vector<Platform*>{ground, new Platform(300, 340, 169, 50, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(527, 340, 80, 50, borderColorAlt, fillColorAlt, 0, 5, false),
@@ -42,33 +48,33 @@ Level* level1Factory() {
             new Platform(1241, 340, 106, 50, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(1405, 340, 123, 50, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(1586, 340, 147, 50, borderColorAlt, fillColorAlt, 0, 5, false)},
-            std::vector<Pickup*>{new Pickup(300+169-6, 330, "", false, false),
-            new Pickup(527+80-6, 330, "", false, false),
-            new Pickup(665+58-6, 330, "", false, false),
-            new Pickup(781+402-6, 330, "", false, false),
-            new Pickup(1241+106-6, 330, "", false, false),
-            new Pickup(1405+123-6, 330, "", false, false),
-            new Pickup(1586+147-6, 330, "", false, false),
+            std::vector<Pickup*>{new Pickup(300+169-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(527+80-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(665+58-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(781+402-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1241+106-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1405+123-6, 330, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1586+147-6, 330, "", false, false, &blankPickupTexture, &serifFont),
             
-            new Pickup(400, 500, ",", false, true),
-            new Pickup(600, 500, "-", false, true),
-            new Pickup(800, 500, ",", false, true),
-            new Pickup(1000, 500, "-", false, true),
-            new Pickup(1200, 500, ":", false, true),
-            new Pickup(1400, 500, ".", false, true),
-            new Pickup(1600, 500, " ", false, true)},
+            new Pickup(400, 500, ",", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(600, 500, "-", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(800, 500, ",", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1000, 500, "-", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1200, 500, ":", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1400, 500, ".", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1600, 500, " ", false, true, &blankPickupTexture, &serifFont)},
             std::vector<std::string>{"The Narrator", "The Narrator", "The Narrator"},
             std::vector<std::string>{
                 "Controls:\n\n - WASD to move\n\n - Space to jump\n\n - P to pick up and place objects\n\n - Shift to sprint",
                 "This level will test your knowledge of basic English grammar. Place the punctuation marks in the correct slots to complete the sentence. Once all punctuation marks have been placed, you will be told whether your use of punctuation is correct or not. Press enter to continue.",
                 "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press enter to continue."
                 },
-            std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
-            std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
+            std::vector<Texture*>{image, image, image},
+            std::vector<Sound*>{sound, sound, sound},
             borderColor, fillColor, textColor);
 }
 
-Level* level2Factory() {
+Level* level2Factory(Texture* image, Sound* sound) {
     return new Level(Vector2{100, 400}, // Level 2: Chemistry based level
         std::vector<Platform*>{ground, new Platform(400, 150, 550, 300, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(1070, 295, 50, 20, borderColorAlt, fillColorAlt, 0, 5, false),
@@ -79,23 +85,22 @@ Level* level2Factory() {
             new Platform(1338, 190, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(1313, 340, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
             new Platform(1338, 340, 20, 80, borderColorAlt, fillColorAlt, 0, 5, false),
-            
         },
         std::vector<Pickup*>{
-            new Pickup(1000, 270, "", false, false),
-            new Pickup(1120, 270, "", false, false),
-            new Pickup(1300, 270, "", false, false),
-            new Pickup(1480, 270, "", false, false),
-            new Pickup(1600, 270, "", false, false),
-            new Pickup(1300, 120, "", false, false),
-            new Pickup(1300, 420, "", false, false),
-            new Pickup(400, 500, "O", false, true),
-            new Pickup(600, 500, "O", false, true),
-            new Pickup(800, 500, "O", false, true),
-            new Pickup(1000, 500, "O", false, true),
-            new Pickup(1200, 500, "H", false, true),
-            new Pickup(1400, 500, "H", false, true),
-            new Pickup(1600, 500, "S", false, true),
+            new Pickup(1000, 270, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1120, 270, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1300, 270, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1480, 270, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1600, 270, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1300, 120, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(1300, 420, "", false, false, &blankPickupTexture, &serifFont),
+            new Pickup(400, 500, "O", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(600, 500, "O", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(800, 500, "O", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1000, 500, "O", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1200, 500, "H", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1400, 500, "H", false, true, &blankPickupTexture, &serifFont),
+            new Pickup(1600, 500, "S", false, true, &blankPickupTexture, &serifFont),
         },
         std::vector<std::string>{"The Narrator", "The Narrator", "The Narrator"},
         std::vector<std::string>{
@@ -103,8 +108,8 @@ Level* level2Factory() {
             "This level will test your knowledge of atomic bonds. Place the elements in the correct slots to complete the specified molecule. Once all atoms have been placed, you will be told whether your arrangement of atoms is correct or not. Press enter to continue.",
             "Welcome to Working Title! Working Title is a game about developing your knowledge of various school subjects through the fun of puzzle platforming. Press enter to continue."
             },
-        std::vector<Image>{LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png"), LoadImage("assets/narrator.png")},
-        std::vector<Sound>{LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3"), LoadSound("assets/empty.mp3")},
+        std::vector<Texture*>{image, image, image},
+        std::vector<Sound*>{sound, sound, sound},
         borderColor, fillColor, textColor);
 }
 
@@ -114,8 +119,8 @@ Level* level3Factory() {
         std::vector<Pickup*>{},
         std::vector<std::string>{},
         std::vector<std::string>{},
-        std::vector<Image>{},
-        std::vector<Sound>{},
+        std::vector<Texture*>{},
+        std::vector<Sound*>{},
         borderColor, fillColor, textColor);
 }
 
@@ -138,12 +143,19 @@ void init_app() {
     
     englishTextToRender = std::vector<std::string>{"The sixteen", "year", "old", "student introduced his friends", "Natalie", "Jackson", "and Ethan"};
     
+    emptySound = LoadSound("assets/empty.mp3");
+    Image narratorImage = LoadImage("assets/narrator.png");
+    narratorTexture = LoadTextureFromImage(narratorImage);
+    
+    blankPickupTexture = LoadTexture("assets/blankPickup.png");
+    serifFont = LoadFont("assets/PlayfairDisplay-Bold.ttf");
+    
     levels = std::vector<Level*>{
         nullptr, // Level 0
         
-        level1Factory(), // Level 1: English based level
+        level1Factory(&narratorTexture, &emptySound), // Level 1: English based level
         
-        level2Factory(), // Level 2: Chemistry based level
+        level2Factory(&narratorTexture, &emptySound), // Level 2: Chemistry based level
         
         level3Factory() // Level 3: Algebra based level
     };
@@ -161,10 +173,10 @@ bool app_loop() {
                 selectedLevel = menuState.selectedLevel;
                 switch (selectedLevel) {
                     case 1:
-                        levels[selectedLevel] = level1Factory();
+                        levels[selectedLevel] = level1Factory(&narratorTexture, &emptySound);
                         break;
                     case 2:
-                        levels[selectedLevel] = level2Factory();
+                        levels[selectedLevel] = level2Factory(&narratorTexture, &emptySound);
                         break;
                     case 3:
                         levels[selectedLevel] = level3Factory();

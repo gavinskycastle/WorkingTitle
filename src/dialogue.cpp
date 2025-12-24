@@ -12,17 +12,14 @@ void DialogueBox::clear() {
     this->dialogueQueue.clear();
 }
 
-void DialogueBox::push(std::string text, std::string name, Image image, Sound sound, bool skippable=true, bool autoSkip=false) {
+void DialogueBox::push(std::string text, std::string name, Texture* image, Sound* sound, bool skippable=true, bool autoSkip=false) {
     Dialogue dialogue;
     dialogue.name = name;
     dialogue.text = text;
     dialogue.sound = sound;
     dialogue.skippable = skippable;
     dialogue.autoSkip = autoSkip;
-    
-    // Resize the image to fit in the dialogue box.
-    ImageResize(&image, 180, 180);
-    dialogue.image = LoadTextureFromImage(image);
+    dialogue.image = image;
     
     this->dialogueQueue.insert(this->dialogueQueue.begin(), dialogue);
 }
@@ -34,11 +31,11 @@ void DialogueBox::draw() {
         
         if (this->displayedText.length() == 0) {
             // Play the sound
-            PlaySound(this->dialogueQueue[0].sound);
+            PlaySound(*this->dialogueQueue[0].sound);
             
             // Calcuate dialogue scroll speed based on sound duration.
             // Use doubles during calculation then cast to int.
-            this->dialogueScrollSpeed = static_cast<int>(30.0 / (static_cast<double>(this->dialogueQueue[0].text.length()) / (static_cast<double>(this->dialogueQueue[0].sound.frameCount) / 48000.0)));
+            this->dialogueScrollSpeed = static_cast<int>(30.0 / (static_cast<double>(this->dialogueQueue[0].text.length()) / (static_cast<double>(this->dialogueQueue[0].sound->frameCount) / 48000.0)));
         }
         
         // Add characters to the displayed text at the speed of dialogueScrollSpeed. (Do this once per second.)
@@ -82,7 +79,7 @@ void DialogueBox::draw() {
         );
         
         // Draw the image
-        DrawTexture(this->dialogueQueue[0].image, 210, GetScreenHeight() - 200, WHITE);
+        DrawTexture(*this->dialogueQueue[0].image, 210, GetScreenHeight() - 200, WHITE);
         
         // Draw the text
         if (dialogueQueue.size() > 0) {
@@ -134,7 +131,7 @@ void DialogueBox::draw() {
                 this->displayedText = this->dialogueQueue[0].text;
             }
             else {
-                StopSound(this->dialogueQueue[0].sound);
+                StopSound(*this->dialogueQueue[0].sound);
                 this->dialogueQueue.erase(this->dialogueQueue.begin());
                 this->displayedText = "";
             }
